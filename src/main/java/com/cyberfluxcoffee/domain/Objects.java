@@ -12,7 +12,5 @@ public class Objects {
 
     public void liberar() {semaforo.release();}
 
-    public int getDisponiveis() {return semaforo.availablePermits();}
-
     public boolean temDisponivel() {return semaforo.availablePermits() > 0;}
 }

@@ -42,8 +42,7 @@ public class PolicyManager {
                     return true;
                 } else {
                     pcs.liberar(); // Libera o PC caso não consiga alocar VR
-                    return false;
-                }
+                    return false;}
             }
         } else if (cliente.getTipo() == 1) { // Freelancer
             if (pcs.tentarAlocar()) {
@@ -53,16 +52,14 @@ public class PolicyManager {
                     return true;
                 } else {
                     pcs.liberar(); // Libera o PC caso não consiga alocar VR
-                    return false;
-                }
+                    return false;}
             }
         } else if (cliente.getTipo() == 2) { // Estudante
             if (pcs.tentarAlocar()) {
                 cliente.setUsouPC(true);
                 return true;
             } else {
-                return false;
-            }
+                return false;}
         }
         return false;
     }
@@ -83,12 +80,9 @@ public class PolicyManager {
 
     public void liberarRecursos(Client cliente) {
         try {
-            //System.out.println("🔑 Tentando adquirir lock para liberar objetos...");
             if (!lock.tryAcquire(10, TimeUnit.SECONDS)) {
-                //System.err.println("🚨 Falha ao adquirir lock em liberarObjects! Cliente: " + cliente.getIdClient());
                 return;
             }
-            System.out.println("Cliente " + cliente.getIdClient() + " liberando objetos...");
             if (cliente.usouPC()) pcs.liberar();
             if (cliente.usouVR()) vr.liberar();
             if (cliente.usouCadeira()) cadeiras.liberar();
@@ -111,7 +105,6 @@ public class PolicyManager {
         //System.out.println("📢 Tentando notificar clientes... Clientes na fila: " + filaClientes.size());
         try {
             if (!lock.tryAcquire(10, TimeUnit.SECONDS)) {
-                //System.err.println("🚨 Timeout ao tentar notificar clientes!");
                 return;
             }
 
@@ -124,7 +117,7 @@ public class PolicyManager {
             }
             if (clienteAtendido != null) {
                 filaClientes.remove(clienteAtendido);
-                System.out.println("🔔 Notificando cliente: " + clienteAtendido.getIdClient());
+                //System.out.println("🔔 Notificando cliente: " + clienteAtendido.getIdClient());
                 clienteAtendido.notificarCliente();}
 
         } catch (InterruptedException e) {

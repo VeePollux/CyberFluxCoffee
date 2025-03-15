@@ -88,7 +88,6 @@ public class Client extends Thread {
                     aguardarNaFila();
                     continue; // Tenta novamente após esperar
                      }
-                //System.out.println("🚨 " + getTipoString() + " " + id + " conseguiu PC...");
 
                 if (tipo != 2) {
                     // Agora tenta alocar o recurso opcional (cadeira ou VR) por 10 segundos
@@ -113,8 +112,9 @@ public class Client extends Thread {
                 //Conseguiu tudo que precisava, se ele estiver na fila, remove
                 policyManager.removerDaFila(this);
 
-                // Se conseguiu tudo, simula o uso
-                System.out.println("\uD83D\uDE80 Cliente " + id + " usando recursos... " + getTipoString());
+                // Comentário para o tipo de cliente que está usando os recursos
+                //System.out.println("\uD83D\uDE80 Cliente " + id + " usando recursos... " + getTipoString());
+
                 finalStatistics.registrarEntrada();
                 if (usouPC) finalStatistics.registrarUsoPC();
                 if (usouVR) finalStatistics.registrarUsoVR();
@@ -125,7 +125,9 @@ public class Client extends Thread {
 
                 // Após o uso, libera os recursos
                 policyManager.liberarRecursos(this);
-                System.out.println("🚨 Cliente " + id + " liberando recursos...");
+
+                //Comentário para o tipo de cliente que está liberando os recursos
+                //System.out.println("🚨 Cliente " + id + " liberando recursos..." + getTipoString());
 
                 return; // Sai do loop após utilizar o recurso
             } catch (InterruptedException e) {
@@ -136,8 +138,8 @@ public class Client extends Thread {
 
     private void simularUso() {
         try {
-            System.out.println("🚨 Cliente " + id + " simulando uso...");
-            int tempoUso = 15_000 + random.nextInt(45_000);
+            //System.out.println("🚨 Cliente " + id + " simulando uso..." + getTipoString());
+            int tempoUso = 15_000 + random.nextInt(20_000);
             while (tempoUso > 0 && !simulacaoEncerrada) {
                 Thread.sleep(1000);
                 tempoUso -= 1000;
