@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+//Se estiver usando o windows e queira ver os logs, tire os emojis do código, pois o windows não suporta emojis
+
 public class CyberFluxCoffeeSimulator {
     public static void main(String[] args) {
 
